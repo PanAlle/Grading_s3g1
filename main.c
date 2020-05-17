@@ -45,7 +45,7 @@ void ReadFile(Student *Student) {
         strcpy(Student[i].EmailAddress, tmp);
     }
 
-
+    fclose(fp);
 
 }
 
