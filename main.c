@@ -80,7 +80,6 @@ void WriteFile(Student *Student){
     //printf("Counter %d", counter);
     //for (int j = 0; j < 2; j++){
     for (int k = 0; k < 2 ; ++k) {
-
     fprintf(fw, "%s%s<%s>:%1.1f\n", Student[i].FirstName, Student[i].LastName, Student[i].EmailAddress, Grade);
     i++;
     }
@@ -92,7 +91,7 @@ void WriteFile(Student *Student){
 int main() {
     Student Student[100];
     ReadFile(Student);
-    //printf("Counter in main loop %d\n" );
+    printf("Counter in main loop %d\n", sizeof(Student)/sizeof(Student[0]) );
     WriteFile(Student);
 
 
