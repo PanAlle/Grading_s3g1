@@ -42,8 +42,10 @@ void ReadFile(Student *Student) {
 
         tmp = strtok(NULL, ",");
         Student[i].EmailAddress = strdup(tmp);
-        //Student[i].EmailAddress = malloc(sizeof(tmp)+1);
-        //strcpy(Student[i].EmailAddress, tmp);
+        //Delete the last value, that is a /n new line command
+        Student[i].EmailAddress[strlen(Student[i].EmailAddress) - 1] = 0;
+        //Iterate throught the struct
+        i++;
     }
 
     fclose(fp);
@@ -75,16 +77,22 @@ void WriteFile(Student *Student){
     else if (Points >= 86 && Points <= 91) Grade = 1.7;
     else if (Points >= 91 && Points <= 96) Grade = 1.3;
     else if (Points >= 96 && Points <= 100) Grade = 1.0;
-    fprintf(fw, "%s%s\n<%s>:%1.1f", Student[i].FirstName, Student[i].LastName, Student[i].EmailAddress, Grade);
+    //printf("Counter %d", counter);
+    //for (int j = 0; j < 2; j++){
+    for (int k = 0; k < 2 ; ++k) {
+
+    fprintf(fw, "%s%s<%s>:%1.1f\n", Student[i].FirstName, Student[i].LastName, Student[i].EmailAddress, Grade);
+    i++;
+    }
+    //}
     fclose(fw);
+
 }
 
 int main() {
-    printf("Helle");
     Student Student[100];
     ReadFile(Student);
-    //printf("Nome 1 %s\n",Student[0].FirstName);
-    //printf("Nome 2 %s\n",Student[1].LastName);
+    //printf("Counter in main loop %d\n" );
     WriteFile(Student);
 
 
