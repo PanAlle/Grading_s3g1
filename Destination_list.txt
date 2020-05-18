@@ -1,2 +1,2 @@
 Peter Casta <peter.pasta@tum.de>: 2.7
-Lisa Lasagna <lisa.lasagna@tum.de>: 2.7
+Lisa Lasagna <lisa.lasagna@tum.de>: 3.7
