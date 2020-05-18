@@ -9,13 +9,12 @@ typedef struct {
     char *LastName;
     int PointOfAssignement[4];
     char *EmailAddress;
-    int counter;
 } Student;
 
 
-void ReadFile(Student *Student, int *counter) {
+void ReadFile(Student *Student, int *counter, char *ReadFileName) {
     FILE *fp;
-    fp = fopen("C:\\Users\\utente\\CLionProjects\\Grading_s3g1\\Student_list.txt", "r");
+    fp = fopen( ReadFileName, "r");
     int i = 0;
     if (fp == NULL) {
         printf("Can't find the file");
@@ -57,9 +56,9 @@ void ReadFile(Student *Student, int *counter) {
 }
 
 
-void WriteFile(Student *Student, int* counter) {
+void WriteFile(Student *Student, int* counter, char* WriteFileName) {
     FILE *fw;
-    fw = fopen("C:\\Users\\utente\\CLionProjects\\Grading_s3g1\\Destination_list.txt", "w");
+    fw = fopen(WriteFileName, "w");
     if (fw == NULL) {
         printf("Can't find the file");
     }
@@ -82,8 +81,8 @@ void WriteFile(Student *Student, int* counter) {
     else if (Points >= 91 && Points <= 96) Grade = 1.3;
     else if (Points >= 96 && Points <= 100) Grade = 1.0;
 
+    fprintf(fw, "%s %s <%s>: %1.1f\n", Student[k].FirstName, Student[k].LastName, Student[k].EmailAddress, Grade);
 
-        fprintf(fw, "%s %s <%s>: %1.1f\n", Student[k].FirstName, Student[k].LastName, Student[k].EmailAddress, Grade);
     }
     fclose(fw);
 
@@ -103,7 +102,6 @@ void HighScore(Student *Student, int* counter){
         high_score = current_score;
         ID = k;
     }
-        printf("High score %f", high_score);
         if (high_score >= 0.0 && high_score <= 50) max_grade = 5.0;
         else if (high_score >= 50 && high_score <= 55.5) max_grade = 4.0;
         else if (high_score >= 55.5 && high_score <= 60.5) max_grade = 3.7;
@@ -121,10 +119,14 @@ void HighScore(Student *Student, int* counter){
 }
 
 int main() {
+    //char ptr to the read and write file destination
+    char *ReadFileName = "C:\\Users\\utente\\CLionProjects\\Grading_s3g1\\Student_list.txt";
+    char *WriteFileName = "C:\\Users\\utente\\CLionProjects\\Grading_s3g1\\Destination_list.txt";
+    //Initialize a counter for the number of Student instaces are present in the Read File
     int counter = 0;
     Student Student[100];
-    ReadFile(Student,  &counter);
-    WriteFile(Student, &counter);
+    ReadFile(Student,  &counter, ReadFileName);
+    WriteFile(Student, &counter, WriteFileName);
     HighScore(Student, &counter);
 
 
